@@ -2,7 +2,11 @@ import re
 from google import genai
 import ddgs
 
+# Get API key
 client = genai.Client()
+
+# The system prompt that will be used for the agent
+ques = input("Task: ")
 
 SYSTEM_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
@@ -20,7 +24,7 @@ example use :
 dummy_search_tool("What is the weather in London?")
 
 
-ALWAYS use the following format:
+ALWAYS use the following exact format:
 
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
@@ -29,19 +33,26 @@ Action:$Python Function Call
 
 Now begin! Reminder to ALWAYS use the exact characters when you provide a definitive answer.
 
-Question: Provide me with a list of the best savings accounts"""
+Question: """ + ques
 
-
+# Define a dummy tool to use for testing purposes
 def dummy_search_tool(search_term:str) -> str:
-    return "Hello this was the result of the search"
+    return f"Hello this was the result of the search for: {search_term}"
 
+# Generate the response
+response = client.models.generate_content(
+    model="gemini-2.5-flash", contents=SYSTEM_PROMPT
+)
+print(response.text)
 
-#response = client.models.generate_content(
-#    model="gemini-2.5-flash", contents=SYSTEM_PROMPT
-#)
-response = "Hello dummy_search_toolx() dummy_search_tool('Test')"
-
-tool_use=re.search("(dummy_search_tool)\(.*\)$",response)
+# Find the tool that the agent has called
+tool_use=re.search("(dummy_search_tool)\(.*\)$",response.text)
 
 if tool_use:
     print(tool_use.group())
+
+    outcome = eval(tool_use.group())
+    print(outcome)
+# Error if no text generated
+else:
+    print("Code not formatted right. Try again")
