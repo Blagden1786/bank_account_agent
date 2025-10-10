@@ -62,7 +62,7 @@ if tool_use:
     model="gemini-2.5-flash", contents=new_prompt
     )
 
-    print("\nFINAL ANSWER \n\n")
+    print("\n-----------FINAL ANSWER------------\n")
     print(response.text)
 
 
