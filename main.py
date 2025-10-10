@@ -6,7 +6,7 @@ import ddgs
 client = genai.Client()
 
 # The system prompt that will be used for the agent
-ques = input("Task: ")
+#ques = input("Task: ")
 
 SYSTEM_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
@@ -33,11 +33,14 @@ Action:$Python Function Call
 
 Now begin! Reminder to ALWAYS use the exact characters when you provide a definitive answer.
 
-Question: """ + ques
+Question: Find me the worst instant access savings accounts"""
 
 # Define a dummy tool to use for testing purposes
 def dummy_search_tool(search_term:str) -> str:
-    return f"Hello this was the result of the search for: {search_term}"
+    return f"Natwest: 3.5%, Monzo: 5%, Suffolk Building Society: 8%"
+
+def interest_calc(rate, investment, time):
+    return investment*rate**time
 
 # Generate the response
 response = client.models.generate_content(
@@ -53,6 +56,16 @@ if tool_use:
 
     outcome = eval(tool_use.group())
     print(outcome)
+
+    new_prompt = SYSTEM_PROMPT + f"\nThe result of the first tool use was:\n{outcome}.\nIf this is sufficient information to make a recommendation "
+    response = client.models.generate_content(
+    model="gemini-2.5-flash", contents=new_prompt
+    )
+
+    print("\nFINAL ANSWER \n\n")
+    print(response.text)
+
+
 # Error if no text generated
 else:
     print("Code not formatted right. Try again")
