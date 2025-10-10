@@ -3,7 +3,7 @@ from google import genai
 import ddgs
 
 # Debug settings
-trace = True
+trace = False
 
 # Get API key
 client = genai.Client()
@@ -64,14 +64,17 @@ if trace:
 # Find the tool that the agent has called
 tool_use=re.search("(dummy_search_tool)\(.*\)$",response.text)
 
+
 if tool_use:
     if trace:
         print(tool_use.group())
 
+    # Use the tool
     outcome = eval(tool_use.group())
     if trace:
         print(outcome)
 
+    # Tell the llm what the outcome was and tell it to now find the best savings account
     new_prompt = SYSTEM_PROMPT + response.text + f"\nThe result of the first tool use was:\n{outcome}.\nIf this is sufficient information to make a recommendation, Respond in exactly the same way to call a tool to find out how much a £100 investment would grow to over 5 years using the best investment. If not, write another search term"
     response = client.models.generate_content(
     model="gemini-2.5-flash", contents=new_prompt
@@ -80,16 +83,19 @@ if tool_use:
     if trace:
         print(response.text)
 
+    # Pull out the tool
     tool_use=re.search("(interest_calc)\(.*\)$",response.text)
 
     if tool_use:
         if trace:
             print(tool_use.group())
 
+        # Run the interest calc tool
         outcome = eval(tool_use.group())
         if trace:
             print(outcome)
 
+        # Give it the answer from the tool and tell it to povide an answer to the user
         prompt = new_prompt + f"\n{response.text}" + f"\nThe result of the second tool use was:\n{outcome}.\n Now make a recommendation of the best account to use and the calculated return."
         response = client.models.generate_content(
             model="gemini-2.5-flash", contents=prompt
