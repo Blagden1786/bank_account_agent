@@ -1,9 +1,8 @@
 import re
+from tools import *
 from google import genai
 import ddgs
 
-# Debug settings
-trace = False
 
 # Get API key
 client = genai.Client()
@@ -42,66 +41,32 @@ Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:$Python Function Call
 
+Now begin, remember to use the EXACT format as above.
+Once you have sufficient information to provide an answer give a natural answer to the question.
 
-Now begin! Reminder to ALWAYS use the exact characters when you provide a definitive answer.
-
-Question: Find me the best instant access savings accounts"""
-
-# Define a dummy tool to use for testing purposes
-def dummy_search_tool(search_term:str) -> str:
-    return f"Natwest: 3.5%, Monzo: 5%, Suffolk Building Society: 8%"
-
-def interest_calc(rate, investment, time):
-    return investment*(1+rate)**time
-
-# Generate the response
-response = client.models.generate_content(
-    model="gemini-2.5-flash", contents=SYSTEM_PROMPT
-)
-if trace:
-    print(response.text)
-
-# Find the tool that the agent has called
-tool_use=re.search("(dummy_search_tool)\(.*\)$",response.text)
+Question: Find me the best instant access savings accounts and find the value of an investment of £100 over 5 years for that account."""
 
 
-if tool_use:
-    if trace:
-        print(tool_use.group())
-
-    # Use the tool
-    outcome = eval(tool_use.group())
-    if trace:
-        print(outcome)
-
-    # Tell the llm what the outcome was and tell it to now find the best savings account
-    new_prompt = SYSTEM_PROMPT + response.text + f"\nThe result of the first tool use was:\n{outcome}.\nIf this is sufficient information to make a recommendation, Respond in exactly the same way to call a tool to find out how much a £100 investment would grow to over 5 years using the best investment. If not, write another search term"
-    response = client.models.generate_content(
-    model="gemini-2.5-flash", contents=new_prompt
-    )
-
-    if trace:
-        print(response.text)
-
-    # Pull out the tool
-    tool_use=re.search("(interest_calc)\(.*\)$",response.text)
-
-    if tool_use:
-        if trace:
-            print(tool_use.group())
-
-        # Run the interest calc tool
-        outcome = eval(tool_use.group())
-        if trace:
-            print(outcome)
-
-        # Give it the answer from the tool and tell it to povide an answer to the user
-        prompt = new_prompt + f"\n{response.text}" + f"\nThe result of the second tool use was:\n{outcome}.\n Now make a recommendation of the best account to use and the calculated return."
+def run_agent(prompt, trace) -> str:
+    while True:
+        # Generate the response
         response = client.models.generate_content(
             model="gemini-2.5-flash", contents=prompt
         )
+        if trace:
+            print(f"----------Debug Agent Response----------\n{response.text}\n----------------------------------------\n")
+        # Find the tool that is wanted to be used
+        tool_use=re.search(func_regex,response.text)
+        # No tool is called then the agent has sufficient info so it can produce an answer
+        if tool_use == None:
+            return response.text
 
-        print(response.text)
-# Error if no text generated
-else:
-    print("Code not formatted right. Try again")
+        # Use the tool
+        outcome = eval(tool_use.group())
+        if trace:
+            print(f"----------Tool Use----------\n{tool_use.group()}\n----------------------------\n")
+            print(f"----------Outcome----------\n{outcome}\n---------------------------\n")
+
+        prompt += f"\nAgent response: {response.text}\nThe outcome of the usage of the tool use was {outcome}"
+
+print(run_agent(SYSTEM_PROMPT, True))
