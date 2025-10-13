@@ -1,6 +1,7 @@
 import re
 from tools import *
 from google import genai
+from smolagents import DuckDuckGoSearchTool
 import ddgs
 
 
@@ -12,7 +13,7 @@ client = genai.Client()
 
 SYSTEM_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
-dummy_search_tool: Get the result of a web search
+web_search_tool: Get the result of a web search
     Input
         - search_term (str): The search term to use
 
@@ -26,11 +27,11 @@ The way you use the tools is by specifying python code.
 Specifically, this python code should be a single function call to the tool that you wish to use.
 
 The only values that should be in the "action" field are:
-dummy_search_tool: Run a search for the given term, args: {"search_term": {type: string}}
+web_search_tool: Run a search for the given term, args: {"search_term": {type: string}}
 interest_calc: Calculate the growth of an investment over a few years, args: {"rate": {type: float}, "investment": {type: float}, "time": {type: float}}
 example uses :
 
-dummy_search_tool("What is the weather in London?"),
+web_search_tool("What is the weather in London?"),
 
 interest_calc(0.04, 1000, 1)
 
