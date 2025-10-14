@@ -45,7 +45,7 @@ Action:$Python Function Call
 Now begin, remember to use the EXACT format as above.
 Once you have sufficient information to provide an answer give a natural answer to the question.
 
-Question: Find me the best fixed rate ISA and find the value of an investment of £1000 over 1 year for that account."""
+Question: Find me the ISA and find the value of an investment of £1000 over 1 year for that account."""
 
 
 def run_agent(prompt, trace) -> str:

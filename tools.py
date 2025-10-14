@@ -13,7 +13,7 @@ def dummy_search_tool(search_term:str) -> str:
 # Proper search tool
 def web_search_tool(search_term):
     # We will extract plain text from this webpage
-    urls = ['https://www.natwest.com/savings.html']
+    urls = ['https://www.natwest.com/savings.html', 'https://www.hsbc.co.uk/savings/products/']
     # Get HTML source code of the webpage
     response = str([web_search(url) for url in urls])
 
@@ -29,6 +29,6 @@ match_num = r'[+-]?(?:\d*\.\d+|\d+)'
 
 dummy_search_regex = r'(dummy_search_tool\(".*"\))'
 web_search_regex = r'(web_search_tool\((search_term=)*".*"\))'
-interest_calc_regex = f'(interest_calc\((rate=)*{match_num}\,(investment=)*( )*{match_num}\,(time=)*( )*{match_num}\))'
+interest_calc_regex = f'(interest_calc\((rate=)*{match_num}\,( )*(investment=)*{match_num}\,( )*(time=)*{match_num}\))'
 
 func_regex = f"{web_search_regex}|{interest_calc_regex}"

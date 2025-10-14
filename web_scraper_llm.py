@@ -43,8 +43,6 @@ def web_search(url) -> str:
     Returns:
         str: Output of LLM for the url search
     """
-    # We will extract plain text from this webpage
-    url = 'https://www.natwest.com/savings.html'
     # Get HTML source code of the webpage
     response = requests.get(url)
 
