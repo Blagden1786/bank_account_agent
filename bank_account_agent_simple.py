@@ -13,9 +13,7 @@ client = genai.Client()
 
 SYSTEM_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
-web_search_tool: Get the result of a web search
-    Input
-        - search_term (str): The search term to use
+account_finder_tool: Get information about different savings account
 
 interest_calc: Calculate the growth of an investment over a few years.
     Input
@@ -27,11 +25,11 @@ The way you use the tools is by specifying python code.
 Specifically, this python code should be a single function call to the tool that you wish to use.
 
 The only values that should be in the "action" field are:
-web_search_tool: Run a search for the given term, args: {"search_term": {type: string}}
+account_finder_tool: Run a search for the given term, args: None
 interest_calc: Calculate the growth of an investment over a few years, args: {"rate": {type: float}, "investment": {type: float}, "time": {type: float}}
 example uses :
 
-web_search_tool("What is the weather in London?"),
+account_finder_tool(),
 
 interest_calc(0.04, 1000, 1)
 
@@ -45,7 +43,7 @@ Action:$Python Function Call
 Now begin, remember to use the EXACT format as above.
 Once you have sufficient information to provide an answer give a natural answer to the question.
 
-Question: Find me the ISA and find the value of an investment of £1000 over 1 year for that account."""
+Question: Find me the best variable rate savings account and find the value of an investment of £1000 over 1 year for that account."""
 
 
 def run_agent(prompt, trace) -> str:
