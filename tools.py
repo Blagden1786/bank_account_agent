@@ -1,10 +1,5 @@
-
-# Define a dummy tool to use for testing purposes
-import re
-import requests
-from bs4 import BeautifulSoup
-
 from web_scraper_llm import web_search
+
 
 # Dummy search tool
 def dummy_search_tool(search_term:str) -> str:
@@ -15,7 +10,7 @@ def account_finder_tool():
     # We will extract plain text from this webpage
     urls = ['https://www.natwest.com/savings.html', 'https://www.hsbc.co.uk/savings/products/']
     # Get HTML source code of the webpage
-    response = str([web_search(url) for url in urls])
+    response = web_search(urls)
 
     return response
 

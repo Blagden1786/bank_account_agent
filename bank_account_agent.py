@@ -5,9 +5,6 @@ from smolagents import DuckDuckGoSearchTool
 import ddgs
 
 
-# Get API key
-client = genai.Client()
-
 # The system prompt that will be used for the agent
 #ques = input("Task: ")
 
@@ -47,6 +44,9 @@ Question: Find me the best variable rate savings account and find the value of a
 
 
 def run_agent(prompt, trace) -> str:
+    # Get API key
+    client = genai.Client()
+
     while True:
         # Generate the response
         response = client.models.generate_content(
