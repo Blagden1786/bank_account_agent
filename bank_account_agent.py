@@ -8,7 +8,7 @@ import ddgs
 # The system prompt that will be used for the agent
 #ques = input("Task: ")
 
-SYSTEM_PROMPT = """Answer the following question as best you can. You have access to the following tools:
+BANK_ACCOUNT_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
 account_finder_tool: Get information about different savings account
 
@@ -40,7 +40,7 @@ Action:$Python Function Call
 Now begin, remember to use the EXACT format as above.
 Once you have sufficient information to provide an answer give a natural answer to the question.
 
-Question: Find me the best variable rate savings account and find the value of an investment of £1000 over 1 year for that account."""
+Task: """
 
 
 def run_agent(prompt, trace) -> str:
@@ -67,5 +67,3 @@ def run_agent(prompt, trace) -> str:
             print(f"----------Outcome----------\n{outcome}\n---------------------------\n")
 
         prompt += f"\nAgent response: {response.text}\nThe outcome of the usage of the tool use was {outcome}"
-
-print(run_agent(SYSTEM_PROMPT, True))
