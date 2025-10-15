@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from google import genai
 
-'''
 
-'''
+#LLM web scraper. It takes in the text from a number of websites and summarises it to pick out the relevant info on savings accounts
+
 
 def sumamrise(text:str)-> str:
     """Use an llm to summarise the text/html code of a website and pull out the savings in a machine readable format

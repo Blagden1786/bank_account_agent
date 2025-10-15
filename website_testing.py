@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+# Program to test the websites to make sure we can scrape meaningful information from them
+
 # We will extract plain text from this webpage
 url = 'https://www.hsbc.co.uk/savings/products/'
 print(url)

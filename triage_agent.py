@@ -1,6 +1,7 @@
 import re
-from tkinter.messagebox import QUESTION
 from google import genai
+
+# The triage agent will ask questions until it understands the ask, it will then generate a prompt for the other agent
 
 TRIAGE_PROMPT = """You are a triage agent. Your goal is to find out what type of savings account the user is wanting to open. You should ask easy to understand questions until you get all of the required information and once this has been acquired produce a prompt to tell another agent what account to look for.
 The information you are trying to get is:

@@ -1,8 +1,8 @@
-from bank_account_agent import run_agent, BANK_ACCOUNT_PROMPT
+from savings_account_agent import savings_agent, SAVINGS_PROMPT
 from triage_agent import triage_agent, TRIAGE_PROMPT
 
-
+# Run the agents
 
 prompt = triage_agent(TRIAGE_PROMPT)
 
-print(run_agent(BANK_ACCOUNT_PROMPT + prompt, True))
+print(savings_agent(SAVINGS_PROMPT + prompt, True))

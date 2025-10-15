@@ -1,5 +1,6 @@
-from web_scraper_llm import web_search
+from tools.web_scraper_llm import web_search
 
+# The tools the bank account agent can use.
 
 # Dummy search tool
 def dummy_search_tool(search_term:str) -> str:

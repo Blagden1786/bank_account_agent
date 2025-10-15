@@ -1,14 +1,12 @@
 import re
-from tools import *
+from tools.tools import *
 from google import genai
-from smolagents import DuckDuckGoSearchTool
-import ddgs
 
 
-# The system prompt that will be used for the agent
-#ques = input("Task: ")
 
-BANK_ACCOUNT_PROMPT = """Answer the following question as best you can. You have access to the following tools:
+# The savings account agent finds the savings which match the query
+
+SAVINGS_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
 account_finder_tool: Get information about different savings account
 
@@ -43,7 +41,7 @@ Once you have sufficient information to provide an answer give a natural answer 
 Task: """
 
 
-def run_agent(prompt, trace) -> str:
+def savings_agent(prompt, trace) -> str:
     # Get API key
     client = genai.Client()
 
