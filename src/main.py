@@ -1,4 +1,4 @@
-from savings_account_agent import savings_agent, SAVINGS_PROMPT
+from savings_agent import savings_agent, SAVINGS_PROMPT
 from triage_agent import triage_agent, TRIAGE_PROMPT
 import sys
 
