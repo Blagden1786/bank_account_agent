@@ -13,6 +13,7 @@ if len(sys.argv) > 1:
 
 # Run the agents
 prompt = triage_agent(TRIAGE_PROMPT)
+# Add this  + " Once you have selected a savings account, work out how much an investment of £1000 will grow over 3 years. for testing
 
 if trace:
     print(prompt)

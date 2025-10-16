@@ -9,6 +9,8 @@ from google import genai
 SAVINGS_PROMPT = """Answer the following question as best you can. You have access to the following tools:
 
 account_finder_tool: Get information about different savings account
+    Input
+        - search: A prompt explain what account you are trying to find. ONLY GIVE DETAILS OF THE ACCOUNT, NOT THAT YOU WANT THE BEST ONE
 
 interest_calc: Calculate the growth of an investment over a few years.
     Input
@@ -20,11 +22,11 @@ The way you use the tools is by specifying python code.
 Specifically, this python code should be a single function call to the tool that you wish to use.
 
 The only values that should be in the "action" field are:
-account_finder_tool: Run a search for the given term, args: None
+account_finder_tool: Run a search for the given term, args: {"search": {type: str}}
 interest_calc: Calculate the growth of an investment over a few years, args: {"rate": {type: float}, "investment": {type: float}, "time": {type: float}}
 example uses :
 
-account_finder_tool(),
+account_finder_tool("Variable rate instant access ISA"),
 
 interest_calc(0.04, 1000, 1)
 

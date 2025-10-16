@@ -6,7 +6,7 @@ from google import genai
 #LLM web scraper. It takes in the text from a number of websites and summarises it to pick out the relevant info on savings accounts
 
 
-def sumamrise(text:str)-> str:
+def sumamrise(text:str, details:str)-> str:
     """Use an llm to summarise the text/html code of a website and pull out the savings in a machine readable format
 
     Args:
@@ -19,6 +19,7 @@ def sumamrise(text:str)-> str:
     PROMPT = """You are a helpful bot that summarises the input websites. Your main goal is to extract the following information for each savings account:
 Bank, Account type, Interest rate, withdrawal limits, ISA or savings account?, Fixed or variable rate?
 
+Only select the savings accounts that comply with this prompt and ignore any ask for the best one if applicable: (""" + details + """)
 After finding this information, place it into a format that is easily machine readable (eg JSON).
 
 For example:
@@ -34,7 +35,7 @@ The input you will receive will either be plain text or html code for a collecti
 
     return response
 
-def web_search(urls:list[str]) -> str:
+def web_search(urls:list[str], details:str) -> str:
     """Web search a collection of webpages to get savings info
 
     Args:
@@ -53,4 +54,4 @@ def web_search(urls:list[str]) -> str:
         soup = BeautifulSoup(response.text, 'html.parser')
         text += soup.get_text() + "\n--------\n"
 
-    return sumamrise(text)
+    return sumamrise(text, details)

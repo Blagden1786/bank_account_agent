@@ -7,7 +7,8 @@ TRIAGE_PROMPT = """You are a triage agent. Your goal is to find out what type of
 The information you are trying to get is:
 Rate: Fixed or Variable
 Access amount: None, instant, etc
-Type of account: ISA or Savings account
+Type of account: ISA or Not
+Any interest calculation the user would like done: Eg £100 over 2 years
 
 When asking a question use exactly the following format:
 QUESTION: <Question>
