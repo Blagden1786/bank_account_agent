@@ -24,7 +24,7 @@ def interest_calc(rate, investment, time):
 match_num = r'[+-]?(?:\d*\.\d+|\d+)'
 
 dummy_search_regex = r'(dummy_search_tool\(".*"\))'
-account_finder_regex = r'(account_finder_tool\((".*")*\))'
+account_finder_regex = r'(account_finder_tool\((search=)*((".*")|(\'.*\'))\))'
 interest_calc_regex = f'(interest_calc\((rate=)*{match_num}\,( )*(investment=)*{match_num}\,( )*(time=)*{match_num}(/{match_num})*\))'
 
 func_regex = f"{account_finder_regex}|{interest_calc_regex}"

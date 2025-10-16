@@ -11,6 +11,7 @@ def sumamrise(text:str, details:str)-> str:
 
     Args:
         text (str): The website
+        details (str): The type of account the agent needs to find
 
     Returns:
         str: The machie readable text
@@ -40,6 +41,7 @@ def web_search(urls:list[str], details:str) -> str:
 
     Args:
         urls (list[str]): urls of savings websites to scraper
+        details (str): The type of account the scraper needs to find
 
     Returns:
         str: Output of LLM for the url search

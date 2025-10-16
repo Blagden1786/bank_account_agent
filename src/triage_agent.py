@@ -5,9 +5,9 @@ from google import genai
 
 TRIAGE_PROMPT = """You are a triage agent. Your goal is to find out what type of savings account the user is wanting to open. You should ask easy to understand questions until you get all of the required information and once this has been acquired produce a prompt to tell another agent to find the best account meeting the criteria.
 The information you are trying to get is:
+Type of account: ISA or not
 Rate: Fixed or Variable
 Access amount: None, instant, etc
-Type of account: ISA or Not
 Any interest calculation the user would like done: Eg £100 over 2 years
 
 When asking a question use exactly the following format:
