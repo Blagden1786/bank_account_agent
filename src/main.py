@@ -1,6 +1,7 @@
 from agents.savings_agent import savings_agent, SAVINGS_PROMPT
 from agents.triage_agent import triage_agent, TRIAGE_PROMPT
 import sys
+import re
 
 
 trace = False
@@ -11,9 +12,25 @@ if len(sys.argv) > 1:
         print("DEBUG MODE\nPrinting all agent outputs...")
 
 
-# Run the agents
-prompt = triage_agent(TRIAGE_PROMPT)
-# Add this  + " Once you have selected a savings account, work out how much an investment of £1000 will grow over 3 years. for testing
+# Run the triage agent first to get the user requirements
+prompt = TRIAGE_PROMPT
+while True:
+    response = triage_agent(prompt)
+
+    next_question=re.search("^QUESTION", response)
+
+    # No tool is called then the agent has sufficient info so it has produced the final prompt to be used by the savings agent
+    if next_question == None:
+        print("Thanks, I will now find the best account for you.")
+        break
+
+    print(response)
+    answer = input("ANSWER: ")
+
+    # Append the answer to the prompt for the next iteration
+    prompt += f"\n{response}: ANSWER: {answer}"
+
+
 
 if trace:
     print(prompt)
