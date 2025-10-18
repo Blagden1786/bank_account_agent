@@ -1,4 +1,4 @@
-from tools.web_scraper_llm import web_search
+from .web_scraper_llm import web_search
 
 # The tools the bank account agent can use.
 

@@ -1,5 +1,5 @@
-from savings_agent import savings_agent, SAVINGS_PROMPT
-from triage_agent import triage_agent, TRIAGE_PROMPT
+from agents.savings_agent import savings_agent, SAVINGS_PROMPT
+from agents.triage_agent import triage_agent, TRIAGE_PROMPT
 import sys
 
 
