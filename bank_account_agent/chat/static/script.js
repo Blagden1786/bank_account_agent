@@ -2,12 +2,20 @@ const chatMessages = document.getElementById('chatMessages');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
+const sendBtnEnableColor = sendBtn.style.backgroundColor;  // Green color when enabled
+
 function sendMessage() {
     const message = userInput.value.trim();
     if (message === '') return;
 
     appendMessage(message, 'user-message');
     userInput.value = '';
+
+    // Prevent user from sending multiple messages quickly
+    console.log("Disabling input during processing");
+    sendBtn.disabled = true;
+    userInput.disabled = true;
+    sendBtn.style.backgroundColor = '#ccc';
 
     // Call server-side agent
     console.log("Sending message to server:", message);
@@ -21,9 +29,17 @@ function sendMessage() {
     })
         .then(response => response.json())
         .then(data => {
+            console.log("Received response from server:", data);
             if (data.reply) {
                 appendMessage(data.reply, 'bot-message');
             }
+        })
+        .finally(() => {
+            // Re-enable input after processing
+            console.log("Re-enabling input after processing");
+            sendBtn.disabled = false;
+            userInput.disabled = false;
+            sendBtn.style.backgroundColor = sendBtnEnableColor;
         });
 }
 
