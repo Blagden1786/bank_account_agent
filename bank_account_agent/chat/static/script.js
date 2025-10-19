@@ -4,13 +4,22 @@ const sendBtn = document.getElementById('sendBtn');
 
 const sendBtnEnableColor = sendBtn.style.backgroundColor;  // Green color when enabled
 
-function sendMessage() {
-    const message = userInput.value.trim();
-    if (message === '') return;
+function sendMessage(onload = false) {
+    let message;
 
-    appendMessage(message, 'user-message');
-    userInput.value = '';
+    // Get the user input if it isn't the function called when the page is loaded
+    if (!onload) {
+        message = userInput.value.trim();
+        if (message === '') return;
 
+        appendMessage(message, 'user-message');
+        userInput.value = '';
+    } else {
+        // Onload message
+        console.log("Onload message triggered");
+        appendMessage("Hello, I am your helpful savings finder. Let's find you the account that best suits your needs.", 'bot-message');
+        message = "Hello";
+    }
     // Prevent user from sending multiple messages quickly
     console.log("Disabling input during processing");
     sendBtn.disabled = true;
@@ -68,6 +77,7 @@ function appendMessage(message, className) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Event listeners
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();

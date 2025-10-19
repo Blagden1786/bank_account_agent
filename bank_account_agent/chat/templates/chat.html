@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Chat App</title>
+  <title>Bank Account Agent</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'styles.css' %}" />
 </head>
-<body>
+<body onload="sendMessage(true)">
   <div class="chat-container">
-    <div class="chat-header">ChatBot</div>
+    <div class="chat-header">Bank Account Agent</div>
     <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-input">
       <input type="text" id="userInput" placeholder="Type your message..." />
