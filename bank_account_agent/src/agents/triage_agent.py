@@ -86,6 +86,7 @@ def triage_agent_django(user_message:str) -> str:
     # If the agent hasn't asked a question, it has enough info
     if next_question == None:
         # Switch to savings agent
+        print(response)
         return savings_agent(SAVINGS_PROMPT + response, True)
     else:
         # Append the question to the prompt file
