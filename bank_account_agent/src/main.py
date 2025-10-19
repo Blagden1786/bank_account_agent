@@ -14,21 +14,7 @@ if len(sys.argv) > 1:
 
 # Run the triage agent first to get the user requirements
 prompt = TRIAGE_PROMPT
-while True:
-    response = triage_agent(prompt)
 
-    next_question=re.search("^QUESTION", response)
-
-    # No tool is called then the agent has sufficient info so it has produced the final prompt to be used by the savings agent
-    if next_question == None:
-        print("Thanks, I will now find the best account for you.")
-        break
-
-    print(response)
-    answer = input("ANSWER: ")
-
-    # Append the answer to the prompt for the next iteration
-    prompt += f"\n{response}: ANSWER: {answer}"
 
 
 
