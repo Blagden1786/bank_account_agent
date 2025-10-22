@@ -14,14 +14,4 @@ The information you have so far is:
 
 ANSWER: Hello
 
-QUESTION: Are you interested in an ISA (Individual Savings Account) or a regular savings account?
-ANSWER: isa
-
-QUESTION: Would you prefer a fixed interest rate, which stays the same for a set period, or a variable interest rate, which can change over time?
-ANSWER: variable
-
-QUESTION: How much access do you need to your money? For example, would you prefer instant access, limited withdrawals, or are you happy to lock your money away for a period with no access?
-ANSWER: instant
-
-QUESTION: Would you like to calculate potential interest earnings for a specific amount over a certain period? If so, please provide the amount and the duration (e.g., £100 over 2 years).
-ANSWER: £3000 over 1 year
+QUESTION: Are you interested in opening an ISA (Individual Savings Account) or a regular savings account?
