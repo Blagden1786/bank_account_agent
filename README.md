@@ -11,3 +11,23 @@ The savings agent takes the details found by the triage agent and uses tools to 
 
 <h3>Result</h3>
 These two agents work together to produce a fully functional system that finds the best rate account satisfying the user requests.
+
+<h1>Running the Agent</h1>
+<h3>Libraries</h3>
+<ul>
+  <li>Django</li>
+  <li>Google Genai</li>
+  <li>Requests</li>
+  <li>BeautifulSoup</li>
+  <li>re</li>
+  <li>sys</li>
+  
+</ul>
+
+You will also need to get a google API key from [this site](https://aistudio.google.com/api-keys) and replace all instances of ```client = genai.Client()``` with ```client = genai.Client(api_key="YOUR_API_KEY")```. These instances are spread across the files in agent_code and agent_code/tools.
+
+<h3>In the terminal</h3>
+Run the file bank_account_agent/agent_code/terminal_app.py in the terminal.
+
+<h3>The web app</h3>
+Run the command: python .\bank_account_agent\manage.py runserver</br> from a terminal and follow the link it produces.
