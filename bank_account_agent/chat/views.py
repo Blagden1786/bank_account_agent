@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from src.agents.triage_agent import triage_agent_django, TRIAGE_PROMPT
-from src.agents.savings_agent import savings_agent, SAVINGS_PROMPT
+from agent_code.agents.triage_agent import triage_agent_django
 
 import re
 
