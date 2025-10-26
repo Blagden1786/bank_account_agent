@@ -14,4 +14,14 @@ The information you have so far is:
 
 ANSWER: Hello
 
-QUESTION: Are you interested in opening an ISA (Individual Savings Account) or a regular savings account?
+QUESTION: Are you interested in a tax-efficient ISA (Individual Savings Account) or a regular savings account?
+ANSWER: isa
+
+QUESTION: Would you prefer an account with a fixed interest rate that stays the same for a set period, or a variable interest rate that can change over time?
+ANSWER: fixed
+
+QUESTION: How often would you like to access your funds? For example, would you prefer instant access, access after a notice period, or are you happy to have no access until the account matures?
+ANSWER: no access
+
+QUESTION: Would you like us to provide an example of how much interest you could earn? If so, please tell us the amount you might deposit and over what period (e.g., £1,000 over 5 years).
+ANSWER: No thanks

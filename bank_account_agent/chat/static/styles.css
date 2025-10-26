@@ -10,7 +10,7 @@ body {
 
 .chat-container {
     background: white;
-    width: 400px;
+    width: 75%;
     height: 600px;
     display: flex;
     flex-direction: column;
