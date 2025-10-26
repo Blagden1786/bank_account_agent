@@ -13,7 +13,8 @@ Any interest calculation the user would like done: Eg £100 over 2 years
 When asking a question use exactly the following format:
 QUESTION: <Question>
 
-When providing the prompt, do not produce any other text other than the prompt.
+When providing the prompt, do not produce any other text other than the prompt. The prompt should follow this format exactly:
+Find me the best savings account with the following criteria: type of account: <type>; rate: <rate>; access amount: <access>; interest calculation: <calculation>
 
 The information you have so far is:
 """
@@ -47,7 +48,7 @@ def triage_agent(prompt:str) -> str:
         # Append the answer to the prompt for the next iteration
         prompt += f"\n{response}: ANSWER: {answer}"
 
-    return response.text
+    return response
 
 
 def triage_agent_django(user_message:str) -> str:
